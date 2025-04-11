@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, View } from 'react-native';
+
+import Header from './Componets/Header';
+import LoginForm from './Componets/LoginForm';
+import Footer from './Componets/Footer';
+import HomeScreen from './Pages/HomeScreen'; // <-- este es nuevo
+import styles from './Styles/styles';
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={styles.appContainer}>
+      <View style={styles.appInnerContainer}>
+        <Header isLoggedIn={isLoggedIn} />
+
+        {isLoggedIn ? (
+          <HomeScreen />
+        ) : (
+          <View style={styles.contentWithFooter}>
+            <LoginForm onLogin={() => setIsLoggedIn(true)} />
+            <Footer />
+          </View>
+        )}
+      </View>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
