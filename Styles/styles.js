@@ -175,6 +175,28 @@ const styles = StyleSheet.create({
   },
   
 
+  //Publicion
+
+  adBannerContainer: {
+    backgroundColor: 'grey', // fondo negro para pruebas
+    height: 100,
+    width: '100%',
+  },
+  
+  
+  adImage: {
+    width: '90%',
+    height: 100,
+    borderRadius: 10,
+  },
+  
+  adText: {
+    marginTop: 6,
+    color: '#555',
+    fontSize: 13,
+  },
+  
+
     // Footer
     footerContainer: {
         position: 'absolute',
