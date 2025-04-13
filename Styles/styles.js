@@ -178,6 +178,12 @@ const styles = StyleSheet.create({
   //Publicion
 
   adBannerContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 5,
+    marginVertical: 10,
+    borderRadius: 10,
     backgroundColor: 'grey', // fondo negro para pruebas
     height: 100,
     width: '100%',
@@ -195,6 +201,143 @@ const styles = StyleSheet.create({
     color: '#555',
     fontSize: 13,
   },
+  
+
+// BusinessProfile
+container: {
+  padding: 16,
+  backgroundColor: '#fff',
+},
+title: {
+  fontSize: 24,
+  fontWeight: 'bold',
+  color: '#1E90FF',
+  marginBottom: 10,
+},
+section: {
+  marginBottom: 12,
+},
+label: {
+  fontWeight: 'bold',
+  fontSize: 14,
+  color: '#333',
+},
+text: {
+  fontSize: 14,
+  color: '#555',
+  marginTop: 2,
+},
+hashtag: {
+  fontSize: 13,
+  color: '#1E90FF',
+  marginLeft: 4,
+},
+profileImage: {
+  width: '100%',
+  height: 180,
+  borderRadius: 12,
+  marginBottom: 16,
+  resizeMode: 'cover',
+},
+
+
+
+
+  //Populasres 
+  populasresContainer: {
+marginTop: 13,
+  marginHorizontal: 2,
+  padding: 8,
+  borderRadius: 16,
+  backgroundColor: '#f0f0f0',
+
+
+    shadowColor: '#000',
+  shadowOffset: { width: 0, height: 4 },
+  shadowOpacity: 0.2,
+  shadowRadius: 6,
+  elevation: 6,
+    },
+    sectionTitle: {
+      fontSize: 20,
+      color: '#333',
+      fontWeight: 'bold',
+      marginBottom: 8,
+
+    },
+    serviceCard: {
+      flexDirection: 'row',
+      backgroundColor: '#fff',
+      borderRadius: 16,
+      padding: 16,
+      marginBottom: 20,
+      alignItems: 'flex-start',
+    
+      // Sombra tipo 3D elegante
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.1,
+      shadowRadius: 8,
+      elevation: 6,
+    },
+    
+    imagePlaceholder: {
+      width: 64,
+      height: 64,
+      borderRadius: 32,
+      backgroundColor: '#d9d9d9',
+      marginRight: 14,
+    },
+    
+    serviceInfo: {
+      flex: 1,
+    },
+    
+    cardTitle: {
+      fontSize: 17,
+      fontWeight: 'bold',
+      color: '#111',
+      marginBottom: 2,
+    },
+    
+    cardSub: {
+      fontSize: 13,
+      fontWeight: '600',
+      color: '#1E90FF',
+      marginBottom: 2,
+    },
+    
+    descriptionText: {
+      fontSize: 13,
+      color: '#444',
+      marginBottom: 4,
+    },
+    
+    hashtagsRow: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      marginTop: 4,
+    },
+    
+    hashtag: {
+      fontSize: 12,
+      marginRight: 8,
+      color: '#1E90FF',
+      fontWeight: '500',
+    },
+    zipCode: {
+      fontSize: 12,
+      color: '#888',
+      marginTop: 4,
+      fontWeight: '500',
+      backgroundColor: '#f0f0f0',
+      fontWeight: 'bold'
+    },
+    
+    
+
+
+ 
   
 
     // Footer

@@ -1,17 +1,25 @@
 import React from 'react';
-import { View, Image, Text } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+
 import SearchBar from './SearchBar';
 import LoginButton from './LoginButton';
-import styles from '../Styles/styles';
 import MenuButton from './MenuButton';
+import styles from '../Styles/styles';
+
 const Header = ({ isLoggedIn, onMenuPress }) => {
+  const navigation = useNavigation(); // ✅ acceso directo a navegación
+
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerTopRow}>
-        <View style={styles.logoContainer}>
+        <TouchableOpacity
+          style={styles.logoContainer}
+          onPress={() => navigation.navigate('Home')} // ✅ lleva a HomeScreen
+        >
           <Image source={require('../Imagen/logo2.png')} style={styles.logoImage} />
           <Text style={styles.logoText}>ServiceHot</Text>
-        </View>
+        </TouchableOpacity>
 
         {isLoggedIn ? (
           <MenuButton onPress={onMenuPress} />
