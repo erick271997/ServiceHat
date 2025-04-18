@@ -1,87 +1,34 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import styles from '../Styles/styles'; // Importa tus estilos desde el archivo de estilos
-import { Image } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
+import styles from '../Styles/styles';
+import Header from '../Componets/Header'; // 👈 Importar header
 
 const BusinessProfile = ({ route }) => {
   const { service } = route.params;
-  const isBusiness = service.businessType !== 'Individual'; // condición clave
 
   return (
-    <ScrollView style={styles.container}>
-        <Image
-  source={{ uri: service.image || 'https://via.placeholder.com/300x150.png?text=Service+Image' }}
-  style={styles.profileImage}
-/>
+    <View style={{ flex: 1 }}>
+      <Header isLoggedIn={true} /> 
 
-      <Text style={styles.title}>{service.name}</Text>
+      <ScrollView contentContainerStyle={styles.profileContainer}>
+        <Text style={styles.profileTitle}>{service.name}</Text>
+        <Text style={styles.profileText}>Type: {service.businessType}</Text>
+        <Text style={styles.profileText}>Category: {service.category}</Text>
+        <Text style={styles.profileText}>ZIP: {service.zipCode}</Text>
+        <Text style={styles.profileText}>
+          Description: {service.description || 'No description provided'}
+        </Text>
 
-      <View style={styles.section}>
-        <Text style={styles.label}>📄 Description:</Text>
-        <Text style={styles.text}>{service.description || 'No description available'}</Text>
-      </View>
-
-      {isBusiness && (
-        <>
-          <View style={styles.section}>
-            <Text style={styles.label}>🏢 Account Type:</Text>
-            <Text style={styles.text}>{service.businessType}</Text>
+        {service.Subcategorías && (
+          <View style={styles.hashtagsRow}>
+            {service.Subcategorías.split(',').slice(0, 4).map((tag, i) => (
+              <Text key={i} style={styles.hashtag}>#{tag.trim()}</Text>
+            ))}
           </View>
-
-          <View style={styles.section}>
-            <Text style={styles.label}>📅 Founded:</Text>
-            <Text style={styles.text}>{service.founded || 'Not provided'}</Text>
-          </View>
-
-          <View style={styles.section}>
-            <Text style={styles.label}>📍 Address:</Text>
-            <Text style={styles.text}>{service.address || 'Not provided'}</Text>
-          </View>
-
-          <View style={styles.section}>
-            <Text style={styles.label}>🌆 City:</Text>
-            <Text style={styles.text}>{service.city || 'Not provided'}</Text>
-          </View>
-
-          <View style={styles.section}>
-            <Text style={styles.label}>🌍 Country:</Text>
-            <Text style={styles.text}>{service.country || 'Not provided'}</Text>
-          </View>
-
-          <View style={styles.section}>
-            <Text style={styles.label}>📞 Phone:</Text>
-            <Text style={styles.text}>{service.phone || 'Not provided'}</Text>
-          </View>
-
-          <View style={styles.section}>
-            <Text style={styles.label}>⭐ Rating:</Text>
-            <Text style={styles.text}>{service.rating || 'No rating yet'}</Text>
-          </View>
-
-          <View style={styles.section}>
-            <Text style={styles.label}>🏷️ Category:</Text>
-            <Text style={styles.text}>{service.category}</Text>
-          </View>
-
-          {service.subcategories && (
-            <View style={styles.section}>
-              <Text style={styles.label}>🔖 Subcategories:</Text>
-              {service.subcategories.split(',').map((sub, index) => (
-                <Text key={index} style={styles.hashtag}>#{sub.trim()}</Text>
-              ))}
-            </View>
-          )}
-
-          <View style={styles.section}>
-            <Text style={styles.label}>🏷️ ZIP Code:</Text>
-            <Text style={styles.text}>{service.zipCode || 'N/A'}</Text>
-          </View>
-        </>
-      )}
-    </ScrollView>
+        )}
+      </ScrollView>
+    </View>
   );
 };
 
-
-  
 export default BusinessProfile;

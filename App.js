@@ -5,6 +5,8 @@ import { ZipProvider } from './Context/ZipContext';
 
 import HomeScreen from './Pages/HomeScreen';
 import BusinessProfile from './Pages/BusinessProfile';
+import UserProfile from './Pages/UserProfile';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +17,9 @@ export default function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Home" component={HomeScreen} />
           <Stack.Screen name="BusinessProfile" component={BusinessProfile} />
+          <Stack.Screen name="UserProfile" component={UserProfile} />
+         
+
         </Stack.Navigator>
       </NavigationContainer>
     </ZipProvider>

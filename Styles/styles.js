@@ -17,15 +17,53 @@ const styles = StyleSheet.create({
   },
     // Menu button
 
-  menuButton: {
-    backgroundColor: 'white',
-    color: '#1E90FF',
-    width: 40,
-    height: 40,    
-    padding: 8,
-    borderRadius: 8,
-  },
-  
+  // Estilo del botón de menú
+menuButton: {
+  padding: 8,
+  borderRadius: 8,
+  backgroundColor: '#fff',
+  elevation: 3,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 4,
+  alignItems: 'center',
+  justifyContent: 'center',
+},
+
+// Menú desplegable
+dropdownMenu: {
+  position: 'absolute',
+  top: 40,
+  right: 0,
+  backgroundColor: '#ffffff',
+  borderRadius: 10,
+  paddingVertical: 6,
+  paddingHorizontal: 0,
+  elevation: 6,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.2,
+  shadowRadius: 8,
+  width: 200,
+  zIndex: 999,
+},
+
+// Cada ítem del menú
+menuItem: {
+  paddingVertical: 12,
+  paddingHorizontal: 16,
+  borderBottomWidth: 1,
+  borderBottomColor: '#eee',
+},
+
+// Texto de cada ítem
+menuText: {
+  fontSize: 16,
+  color: '#333',
+  fontWeight: '500',
+},
+
 
   // Logo y texto
   logoContainer: {
@@ -208,6 +246,13 @@ container: {
   padding: 16,
   backgroundColor: '#fff',
 },
+profileImage: {
+  width: '100%',
+  height: 180,
+  borderRadius: 12,
+  marginBottom: 16,
+  resizeMode: 'cover',
+},
 title: {
   fontSize: 24,
   fontWeight: 'bold',
@@ -232,13 +277,7 @@ hashtag: {
   color: '#1E90FF',
   marginLeft: 4,
 },
-profileImage: {
-  width: '100%',
-  height: 180,
-  borderRadius: 12,
-  marginBottom: 16,
-  resizeMode: 'cover',
-},
+
 
 
 
@@ -333,7 +372,82 @@ marginTop: 13,
       backgroundColor: '#f0f0f0',
       fontWeight: 'bold'
     },
-    
+
+
+    //userProfile
+
+
+
+profileSection: {
+  backgroundColor: '#fff',
+  marginVertical: 10,
+  padding: 16,
+  borderRadius: 12,
+  shadowColor: '#000',
+  shadowOffset: { width: 0, height: 2 },
+  shadowOpacity: 0.1,
+  shadowRadius: 4,
+  elevation: 3,
+  borderWidth: 0.5,
+  borderColor: '#ddd',
+},
+
+profilePhoto: {
+  width: 100,
+  height: 100,
+  borderRadius: 50,
+  alignSelf: 'center',
+  marginBottom: 10,
+  backgroundColor: '#eee',
+},
+
+profileName: {
+  fontSize: 20,
+  fontWeight: 'bold',
+  textAlign: 'center',
+  marginBottom: 4,
+},
+
+profileDescription: {
+  fontSize: 14,
+  textAlign: 'center',
+  color: '#666',
+},
+
+profileLabel: {
+  fontWeight: 'bold',
+  marginBottom: 6,
+  fontSize: 15,
+},
+
+hashtag: {
+  backgroundColor: '#F0F0F0',
+  color: '#333',
+  paddingHorizontal: 10,
+  paddingVertical: 4,
+  borderRadius: 16,
+  marginRight: 6,
+  marginTop: 4,
+  alignSelf: 'flex-start',
+},
+
+galleryItem: {
+  marginTop: 10,
+  borderTopWidth: 1,
+  borderColor: '#eee',
+  paddingTop: 10,
+},
+
+galleryPhoto: {
+  width: '100%',
+  height: 180,
+  borderRadius: 10,
+  marginBottom: 6,
+  backgroundColor: '#ccc',
+},
+
+
+
     
 
 
