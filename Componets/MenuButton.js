@@ -30,6 +30,10 @@ const MenuButton = () => {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.menuItem}>
+            <Text style={styles.menuText}>📜 Service Save</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuText}>📄 Terms & Conditions</Text>
           </TouchableOpacity>
 

@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text, ScrollView } from 'react-native';
+import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import styles from '../Styles/styles';
+import { useNavigation } from '@react-navigation/native';
 
-// 🧪 Simulación de servicios
+// Servicios simulados
 const services = [
   {
     id: 1,
@@ -28,13 +29,12 @@ const services = [
     zipCode: '77090',
     isPremium: false,
   },
-  // Puedes agregar más servicios aquí
 ];
 
-// Simulamos ubicación del usuario
+// Ubicación simulada del usuario
 const userCoords = { latitude: 30.0187, longitude: -95.4693 };
 
-// Calcula distancia en km
+// Cálculo de distancia
 function getDistanceInKm(lat1, lon1, lat2, lon2) {
   const toRad = (value) => (value * Math.PI) / 180;
   const R = 6371;
@@ -47,7 +47,7 @@ function getDistanceInKm(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-// Ordenamos por membresía + cercanía
+// Ordenar por membresía y cercanía
 const sortServices = () => {
   const scored = services.map((service) => {
     const distance = getDistanceInKm(
@@ -59,7 +59,7 @@ const sortServices = () => {
 
     let score = 0;
     if (service.isPremium) score += 2;
-    if (distance <= 5) score += 1; // Cerca
+    if (distance <= 5) score += 1;
 
     return { ...service, distance, score };
   });
@@ -69,22 +69,27 @@ const sortServices = () => {
 
 const AllServicesFeed = () => {
   const sortedServices = sortServices();
+  const navigation = useNavigation();
 
   return (
     <ScrollView style={styles.feedContainer}>
-      <Text style={styles.sectionTitle}>📰 All Services</Text>
+      <Text style={styles.feedTitle}>📰 All Services</Text>
 
       {sortedServices.map((service) => (
-        <View key={service.id} style={styles.serviceCard}>
-          <Text style={styles.cardTitle}>{service.name}</Text>
-          <Text style={styles.cardSub}>Category: {service.category}</Text>
-          <Text style={styles.cardSub}>
-            Premium: {service.isPremium ? '✅ Yes' : '❌ No'}
-          </Text>
-          <Text style={styles.cardSub}>
-            Distance: {service.distance.toFixed(2)} mi
-          </Text>
-        </View>
+        <TouchableOpacity
+          key={service.id}
+          style={styles.feedCard}
+          onPress={() => navigation.navigate('BusinessProfile', { service })}
+        >
+          <View style={styles.feedImagePlaceholder} />
+          <View style={styles.feedInfo}>
+            <Text style={styles.cardTitle}>{service.name}</Text>
+            <Text style={styles.cardSub}>📂 {service.category}</Text>
+            <Text style={styles.cardSub}>
+              📍 {service.distance.toFixed(1)} millas
+            </Text>
+          </View>
+        </TouchableOpacity>
       ))}
     </ScrollView>
   );

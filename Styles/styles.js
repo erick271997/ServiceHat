@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 10,
   },
-    // Menu button
+
 
   // Estilo del botón de menú
 menuButton: {
@@ -107,6 +107,7 @@ menuText: {
     maxWidth: 500,
     alignSelf: 'center',
   },
+  
 
   searchInput: {
     flex: 1,
@@ -242,41 +243,82 @@ menuText: {
   
 
 // BusinessProfile
-container: {
-  padding: 16,
-  backgroundColor: '#fff',
+profileContainer: {
+  padding: 20,
+  backgroundColor: '#F9F9F9',
 },
+
 profileImage: {
   width: '100%',
-  height: 180,
+  height: 200,
   borderRadius: 12,
-  marginBottom: 16,
-  resizeMode: 'cover',
+  marginBottom: 15,
 },
-title: {
+
+profileTitle: {
   fontSize: 24,
   fontWeight: 'bold',
-  color: '#1E90FF',
+  color: '#333',
   marginBottom: 10,
 },
-section: {
-  marginBottom: 12,
+
+profileText: {
+  fontSize: 16,
+  color: '#555',
+  marginBottom: 6,
 },
-label: {
-  fontWeight: 'bold',
+
+hashtagsRow: {
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  marginVertical: 10,
+},
+
+hashtag: {
+  backgroundColor: '#E0E0E0',
+  borderRadius: 15,
+  paddingHorizontal: 10,
+  paddingVertical: 4,
+  margin: 4,
   fontSize: 14,
   color: '#333',
 },
-text: {
-  fontSize: 14,
-  color: '#555',
-  marginTop: 2,
+
+ratingStars: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginVertical: 10,
 },
-hashtag: {
-  fontSize: 13,
+
+star: {
+  color: '#FFD700',
+  fontSize: 20,
+  marginRight: 4,
+},
+
+infoSection: {
+  marginTop: 15,
+  paddingTop: 10,
+  borderTopWidth: 1,
+  borderColor: '#DDD',
+},
+// saveButton:
+saveButton: {
+  flexDirection: 'row',
+  alignItems: 'center',
+  marginTop: 10,
+  backgroundColor: '#E8F0FE',
+  padding: 10,
+  borderRadius: 10,
+  alignSelf: 'flex-start',
+},
+
+saveText: {
+  marginLeft: 8,
   color: '#1E90FF',
-  marginLeft: 4,
+  fontWeight: '600',
 },
+
 
 
 
@@ -448,7 +490,64 @@ galleryPhoto: {
 
 
 
-    
+//AllServicesFeed
+feedTitle: {
+  fontSize: 24,
+  fontWeight: 'bold',
+  color: '#1E90FF',
+  marginBottom: 20,
+  textAlign: 'center',
+  backgroundColor: '#fff',
+  paddingVertical: 12,
+  paddingHorizontal: 20,
+  borderRadius: 10,
+  shadowColor: '#000',
+  shadowOpacity: 0.15,
+  shadowRadius: 6,
+  shadowOffset: { width: 0, height: 3 },
+  elevation: 5,
+},
+
+feedContainer: {
+  paddingHorizontal: 16,
+  paddingTop: 16,
+  backgroundColor: '#f4f4f4',
+},
+
+feedCard: {
+  backgroundColor: '#fff',
+  borderRadius: 10,
+  marginBottom: 16,
+  overflow: 'hidden',
+  elevation: 3,
+  shadowColor: '#000',
+  shadowOpacity: 0.1,
+  shadowRadius: 4,
+  shadowOffset: { width: 0, height: 2 },
+  flexDirection: 'column',
+},
+
+feedImagePlaceholder: {
+  height: 160,
+  backgroundColor: '#d9d9d9',
+},
+
+feedInfo: {
+  padding: 12,
+},
+
+cardTitle: {
+  fontSize: 18,
+  fontWeight: 'bold',
+  marginBottom: 4,
+},
+
+cardSub: {
+  fontSize: 14,
+  color: '#666',
+  marginBottom: 2,
+},
+// 
 
 
  
