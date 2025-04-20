@@ -1,13 +1,17 @@
-// Componets/Agenda.js
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Función para guardar un servicio en la agenda
 const saveToAgenda = async (service) => {
+  if (!service || !service.id) {
+    console.error('❌ Servicio inválido o no definido:', service);
+    return;
+  }
+
   try {
     const saved = await AsyncStorage.getItem('agenda');
     const agenda = saved ? JSON.parse(saved) : [];
 
-    // Evitar duplicados (por ID)
     const alreadySaved = agenda.some(item => item.id === service.id);
     if (!alreadySaved) {
       agenda.push(service);
@@ -20,5 +24,6 @@ const saveToAgenda = async (service) => {
     console.error('Error al guardar en la agenda:', error);
   }
 };
+
 
 export default saveToAgenda;

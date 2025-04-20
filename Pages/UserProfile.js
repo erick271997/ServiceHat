@@ -29,7 +29,7 @@ const user = {
 const UserProfile = () => {
   return (
     <>
-      <Header isLoggedIn={true} hideSearch={true} />
+<Header isLoggedIn={true} setIsLoggedIn={() => {}} hideSearch={true} />
 
       <ScrollView style={styles.appInnerContainer}>
         <Text style={styles.sectionTitle}> Profile</Text>

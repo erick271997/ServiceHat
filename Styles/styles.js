@@ -302,6 +302,40 @@ infoSection: {
   borderTopWidth: 1,
   borderColor: '#DDD',
 },
+
+
+//terms
+// Estilos para Terms & Conditions
+termsContainer: {
+  flex: 1,
+  padding: 20,
+  backgroundColor: '#f5f5f5',
+},
+
+termsTitle: {
+  fontSize: 24,
+  fontWeight: 'bold',
+  marginBottom: 16,
+  color: '#1E90FF',
+  textAlign: 'center',
+},
+
+termsText: {
+  fontSize: 16,
+  color: '#333',
+  lineHeight: 24,
+  marginBottom: 12,
+},
+
+termsSectionTitle: {
+  fontSize: 18,
+  fontWeight: '600',
+  color: '#1E90FF',
+  marginTop: 20,
+  marginBottom: 8,
+},
+
+
 // saveButton:
 saveButton: {
   flexDirection: 'row',

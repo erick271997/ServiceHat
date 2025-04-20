@@ -3,13 +3,21 @@ import { View, Text, ScrollView, Image } from 'react-native';
 import styles from '../Styles/styles';
 import Header from '../Componets/Header'; 
 import { TouchableOpacity } from 'react-native';
-import  SaveToAgenda  from './SavedServices'; // Asegúrate de que esta función esté definida en tu archivo de utilidades
+import  saveToAgenda  from './savedServices'; // Asegúrate de que esta función esté definida en tu archivo de utilidades
 const BusinessProfile = ({ route }) => {
-  const { service } = route.params;
+  const { service } = route.params || {};
 
+  console.log('🧾 Servicio recibido:', service);
+  if (!service) {
+    return (
+      <View style={styles.errorContainer}>
+        <Text style={styles.errorText}>Error: No se encontró el servicio.</Text>
+      </View>
+    );
+  }
   return (
     <View style={{ flex: 1 }}>
-      <Header isLoggedIn={true} /> 
+<Header isLoggedIn={true} setIsLoggedIn={() => {}} />
 
       <ScrollView contentContainerStyle={styles.profileContainer}>
       <Image
@@ -17,6 +25,8 @@ const BusinessProfile = ({ route }) => {
     uri: service.imageUrl || 'https://via.placeholder.com/150',
   }}
   style={styles.profileImage}
+ 
+
 />
 
         <Text style={styles.profileTitle}>{service.name}</Text>
@@ -25,12 +35,15 @@ const BusinessProfile = ({ route }) => {
         <Text style={styles.profileText}>ZIP: {service.zipCode}</Text>
         <Text style={styles.profileText}>
           Description: {service.description || 'No description provided'}
- 
+
 
         </Text>
-        <TouchableOpacity onPress={() => SaveToAgenda(service)}>
-  <Text style={styles.saveButton}> Save Service</Text>
-</TouchableOpacity>
+        {service && (
+  <TouchableOpacity onPress={() => saveToAgenda(service)}>
+    <Text style={styles.saveButton}>💾 Save Service</Text>
+  </TouchableOpacity>
+)}
+
 
                  {/* Estrellas (ejemplo con 4 de 5) */}
 <View style={styles.ratingStars}>

@@ -10,12 +10,13 @@ import styles from '../Styles/styles';
 import AllServicesFeed from './AllServicesFeed';
 
 const HomeScreen = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
 
   return (
     <SafeAreaView style={styles.appContainer}>
       <View style={styles.appInnerContainer}>
-        <Header isLoggedIn={isLoggedIn} />
+      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
 
         {!isLoggedIn ? (
           <>
@@ -36,5 +37,6 @@ const HomeScreen = () => {
     </SafeAreaView>
   );
 };
+
 
 export default HomeScreen;

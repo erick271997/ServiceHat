@@ -6,20 +6,27 @@ import { ZipProvider } from './Context/ZipContext';
 import HomeScreen from './Pages/HomeScreen';
 import BusinessProfile from './Pages/BusinessProfile';
 import UserProfile from './Pages/UserProfile';
-
-
+import serviceSave from './Pages/savedServices';
+import TermsAndConditions from './Pages/TermsConditions';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+
   return (
     <ZipProvider>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen name="Home">
+            {(props) => (
+              <HomeScreen {...props} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            )}
+          </Stack.Screen>
           <Stack.Screen name="BusinessProfile" component={BusinessProfile} />
           <Stack.Screen name="UserProfile" component={UserProfile} />
-         
-
+          <Stack.Screen name="serviceSave" component={serviceSave} />
+          <Stack.Screen name="TermsAndConditions" component={TermsAndConditions} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </ZipProvider>

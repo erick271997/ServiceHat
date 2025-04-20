@@ -80,7 +80,7 @@ const AllServicesFeed = () => {
           key={service.id}
           style={styles.feedCard}
           onPress={() => navigation.navigate('BusinessProfile', { service })}
-        >
+          >
           <View style={styles.feedImagePlaceholder} />
           <View style={styles.feedInfo}>
             <Text style={styles.cardTitle}>{service.name}</Text>
