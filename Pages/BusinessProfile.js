@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Image } from 'react-native';
 import styles from '../Styles/styles';
 import Header from '../Componets/Header'; 
 import { TouchableOpacity } from 'react-native';
-import  saveToAgenda  from './savedServices'; // Asegúrate de que esta función esté definida en tu archivo de utilidades
+import  SaveToAgenda  from './saveToAgenda;'; // Asegúrate de que esta función esté definida en tu archivo de utilidades
 const BusinessProfile = ({ route }) => {
   const { service } = route.params || {};
 
@@ -39,7 +39,7 @@ const BusinessProfile = ({ route }) => {
 
         </Text>
         {service && (
-  <TouchableOpacity onPress={() => saveToAgenda(service)}>
+  <TouchableOpacity onPress={() => SaveToAgenda(service)}>
     <Text style={styles.saveButton}>💾 Save Service</Text>
   </TouchableOpacity>
 )}

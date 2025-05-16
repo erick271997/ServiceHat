@@ -90,10 +90,33 @@ menuText: {
     paddingTop: 2,
   },
 
+
+//createAccount
+
+signUpButton: {
+  backgroundColor: '#3498db', // Azul para diferenciarlo del login
+  padding: 15,
+  borderRadius: 5,
+  width: '100%',
+  alignItems: 'center',
+  marginVertical: 10,
+},
+signUpButtonText: {
+  color: 'white',
+  fontWeight: 'bold',
+},
+  
   // SearchBar
   searchBarWrapper: {
     width: '100%',
     alignItems: 'center',
+  },
+  titleCreate: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    color: '#1E90FF',
+    textAlign: 'center',
+    marginBottom: 10,
   },
 
   searchBarContainer: {

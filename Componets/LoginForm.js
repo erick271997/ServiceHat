@@ -1,8 +1,11 @@
 import React from 'react';
 import { View, TextInput, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; 
 import styles from '../Styles/styles';
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = ({ onLogin, onSwitchToSignUp }) => {
+  const navigation = useNavigation(); 
+
   return (
     <View style={styles.loginFormContainer}>
       <TextInput
@@ -27,9 +30,10 @@ const LoginForm = ({ onLogin }) => {
         <Text style={styles.createAccountText}>Log In</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity>
-        <Text style={styles.signUpText}>Create Account</Text>
-      </TouchableOpacity>
+      <TouchableOpacity onPress={onSwitchToSignUp}>
+  <Text style={styles.signUpText}>Create Account</Text>
+</TouchableOpacity>
+
     </View>
   );
 };

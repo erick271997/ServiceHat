@@ -8,19 +8,31 @@ import LoginForm from '../Componets/LoginForm';
 import Footer from '../Componets/Footer';
 import styles from '../Styles/styles';
 import AllServicesFeed from './AllServicesFeed';
+import SignUpForm from '../Componets/SignUpForm';
 
-const HomeScreen = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-
+const HomeScreen = ({ isLoggedIn, setIsLoggedIn }) => {
+  const [showSignUp, setShowSignUp] = useState(false);
 
   return (
     <SafeAreaView style={styles.appContainer}>
       <View style={styles.appInnerContainer}>
-      <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-
+        <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         {!isLoggedIn ? (
           <>
-            <LoginForm onLogin={() => setIsLoggedIn(true)} />
+            {showSignUp ? (
+              <SignUpForm
+                onSignUp={() => {
+                  setShowSignUp(false);
+                  setIsLoggedIn(true); 
+                }}
+                onSwitchToLogin={() => setShowSignUp(false)}
+              />
+            ) : (
+              <LoginForm
+                onLogin={() => setIsLoggedIn(true)}
+                onSwitchToSignUp={() => setShowSignUp(true)}
+              />
+            )}
             <Footer />
           </>
         ) : (
@@ -37,6 +49,5 @@ const HomeScreen = () => {
     </SafeAreaView>
   );
 };
-
 
 export default HomeScreen;

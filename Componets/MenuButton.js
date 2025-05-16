@@ -20,7 +20,7 @@ const MenuButton = ({ setIsLoggedIn }) => {
 
   const goToSaved = () => {
     setMenuVisible(false);
-    navigation.navigate('serviceSave');
+    navigation.navigate('ServiceSave');
   };
 
   const goToTerms = () => {
@@ -30,35 +30,33 @@ const MenuButton = ({ setIsLoggedIn }) => {
 
   const handleLogout = () => {
     setMenuVisible(false);
-    setIsLoggedIn(false); // Aquí se actualiza el estado de isLoggedIn en HomeScreen
-    // 👈 Aquí ya no dará error
+    setIsLoggedIn(false); 
   };
   return (
     <View style={{ position: 'relative' }}>
       <TouchableOpacity style={styles.menuButton} onPress={toggleMenu}>
         <Ionicons name="menu" size={24} color="#1E90FF" />
       </TouchableOpacity>
-
       {isMenuVisible && (
-        <View style={styles.dropdownMenu}>
-          <TouchableOpacity style={styles.menuItem} onPress={goToProfile}>
-            <Text style={styles.menuText}>👤 My Profile</Text>
-          </TouchableOpacity>
+    <View style={styles.dropdownMenu}>
+      <TouchableOpacity style={styles.menuItem} onPress={goToProfile}>
+        <Text style={styles.menuText}>👤 My Profile</Text>
+      </TouchableOpacity>
 
-          <TouchableOpacity style={styles.menuItem} onPress={goToSaved}>
-            <Text style={styles.menuText}>🗂️ Saved Services</Text>
-          </TouchableOpacity>
+      <TouchableOpacity style={styles.menuItem} onPress={goToSaved}>
+        <Text style={styles.menuText}>🗂️ Saved Services</Text>
+      </TouchableOpacity>
 
-          <TouchableOpacity style={styles.menuItem} onPress={goToTerms}>
-            <Text style={styles.menuText}>📄 Terms & Conditions</Text>
-          </TouchableOpacity>
+      <TouchableOpacity style={styles.menuItem} onPress={goToTerms}>
+        <Text style={styles.menuText}>📄 Terms & Conditions</Text>
+      </TouchableOpacity>
 
-          <TouchableOpacity style={styles.menuItem} onPress={handleLogout}>
-            <Text style={styles.menuText}>🚪 Logout</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      <TouchableOpacity style={styles.menuItem} onPress={handleLogout}>
+        <Text style={styles.menuText}>🚪 Logout</Text>
+      </TouchableOpacity>
     </View>
+  )}
+</View>
   );
 };
 

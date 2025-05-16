@@ -6,7 +6,7 @@ import { ZipProvider } from './Context/ZipContext';
 import HomeScreen from './Pages/HomeScreen';
 import BusinessProfile from './Pages/BusinessProfile';
 import UserProfile from './Pages/UserProfile';
-import serviceSave from './Pages/savedServices';
+import ServiceSave from './Pages/saveToAgenda;';
 import TermsAndConditions from './Pages/TermsConditions';
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +24,7 @@ export default function App() {
           </Stack.Screen>
           <Stack.Screen name="BusinessProfile" component={BusinessProfile} />
           <Stack.Screen name="UserProfile" component={UserProfile} />
-          <Stack.Screen name="serviceSave" component={serviceSave} />
+          <Stack.Screen name="ServiceSave" component={ServiceSave} />
           <Stack.Screen name="TermsAndConditions" component={TermsAndConditions} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
         </Stack.Navigator>
