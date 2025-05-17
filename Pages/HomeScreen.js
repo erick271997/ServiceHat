@@ -9,8 +9,10 @@ import Footer from '../Componets/Footer';
 import styles from '../Styles/styles';
 import AllServicesFeed from './AllServicesFeed';
 import SignUpForm from '../Componets/SignUpForm';
+import { useAuth } from '../Context/AuthContext'; // ✅ NUEVO
 
-const HomeScreen = ({ isLoggedIn, setIsLoggedIn }) => {
+const HomeScreen = () => {
+  const { isLoggedIn, setIsLoggedIn } = useAuth(); // ✅ reemplaza props
   const [showSignUp, setShowSignUp] = useState(false);
 
   return (

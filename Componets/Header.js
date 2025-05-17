@@ -5,6 +5,8 @@ import SearchBar from './SearchBar';
 import LoginButton from './LoginButton';
 import MenuButton from './MenuButton';
 import styles from '../Styles/styles';
+import { useAuth } from '../Context/AuthContext'; // ✅ Importa contexto
+
 
 const Header = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigation = useNavigation();

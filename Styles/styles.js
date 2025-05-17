@@ -112,7 +112,7 @@ signUpButtonText: {
     alignItems: 'center',
   },
   titleCreate: {
-    fontSize: 25,
+    fontSize: 15,
     fontWeight: 'bold',
     color: '#1E90FF',
     textAlign: 'center',

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, TouchableOpacity, Alert } from 'react-native';
+import { auth, db } from '../firebaseConfig';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 import styles from '../Styles/styles';
 
 const SignUpForm = ({ onSignUp, onSwitchToLogin }) => {
@@ -8,83 +11,78 @@ const SignUpForm = ({ onSignUp, onSwitchToLogin }) => {
     email: '',
     password: '',
     confirmPassword: '',
-    phone: '' 
+    phone: '',
   });
 
   const handleChange = (name, value) => {
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async () => {
-    // Validaciones básicas
-    if (!formData.name || !formData.email || !formData.password || !formData.phone) {
+    const { name, email, password, confirmPassword, phone } = formData;
+
+    if (!name || !email || !password || !confirmPassword || !phone) {
       Alert.alert('Error', 'Todos los campos son obligatorios');
       return;
     }
 
-    if (formData.password !== formData.confirmPassword) {
+    if (password !== confirmPassword) {
       Alert.alert('Error', 'Las contraseñas no coinciden');
       return;
     }
 
-    if (formData.password.length < 6) {
+    if (password.length < 6) {
       Alert.alert('Error', 'La contraseña debe tener al menos 6 caracteres');
       return;
     }
 
-    if (!/^\d+$/.test(formData.phone)) {
-      Alert.alert('Error', 'El número de teléfono debe contener solo dígitos');
-      return;
-    }
-
     try {
-      // Aquí llamarías a tu API/backend
-      const response = await fetch('https://tuapi.com/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          password: formData.password,
-          phone: formData.phone // Enviar el número telefónico al backend
-        })
+      // Crear usuario con email y password
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const uid = userCredential.user.uid;
+
+      // Guardar datos en Firestore
+      await setDoc(doc(db, 'users', uid), {
+        name,
+        email,
+        phone,
+        createdAt: serverTimestamp(),
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        onSignUp(data); // Pasar los datos del usuario registrado
-      } else {
-        Alert.alert('Error', data.message || 'Error en el registro');
-      }
+      Alert.alert('Éxito', 'Cuenta creada correctamente');
+      if (onSignUp) onSignUp(); // Cambia de pantalla si quieres
     } catch (error) {
-      Alert.alert('Error', 'No se pudo conectar al servidor');
-      console.error('Error:', error);
+      console.error(error);
+      if (error.code === 'auth/email-already-in-use') {
+        Alert.alert('Error', 'Este correo ya está registrado');
+      } else {
+        Alert.alert('Error', error.message);
+      }
     }
   };
 
   return (
     <View style={styles.loginFormContainer}>
       <Text style={styles.titleCreate}>Welcome! Create your account below</Text>
-      
+
+      <TextInput
+        style={styles.input}
+        placeholder="Full Name"
+        value={formData.name}
+        onChangeText={(text) => handleChange('name', text)}
+      />
+
       <TextInput
         style={styles.input}
         placeholder="Phone Number"
-        placeholderTextColor="#999"
         keyboardType="phone-pad"
         value={formData.phone}
-        onChangeText={(Number) => handleChange('phone', Number)}
+        onChangeText={(text) => handleChange('phone', text)}
       />
 
       <TextInput
         style={styles.input}
         placeholder="Email"
-        placeholderTextColor="#999"
         keyboardType="email-address"
         autoCapitalize="none"
         value={formData.email}
@@ -94,7 +92,6 @@ const SignUpForm = ({ onSignUp, onSwitchToLogin }) => {
       <TextInput
         style={styles.input}
         placeholder="Password"
-        placeholderTextColor="#999"
         secureTextEntry
         value={formData.password}
         onChangeText={(text) => handleChange('password', text)}
@@ -103,16 +100,12 @@ const SignUpForm = ({ onSignUp, onSwitchToLogin }) => {
       <TextInput
         style={styles.input}
         placeholder="Confirm Password"
-        placeholderTextColor="#999"
         secureTextEntry
         value={formData.confirmPassword}
         onChangeText={(text) => handleChange('confirmPassword', text)}
       />
 
-      <TouchableOpacity 
-        style={styles.createAccountButton} 
-        onPress={handleSubmit}
-      >
+      <TouchableOpacity style={styles.createAccountButton} onPress={handleSubmit}>
         <Text style={styles.createAccountText}>Create Account</Text>
       </TouchableOpacity>
 
