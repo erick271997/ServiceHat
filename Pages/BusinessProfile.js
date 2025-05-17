@@ -90,6 +90,7 @@ const BusinessInfoForm = ({ onRegistered, existingBusiness }) => {
           ...formData,
           portfolio: uploadedImages,
           updatedAt: serverTimestamp(),
+          lastUpdated: serverTimestamp(),
         });
         Alert.alert('Success', 'Business updated.');
       } else {
@@ -97,6 +98,7 @@ const BusinessInfoForm = ({ onRegistered, existingBusiness }) => {
           ...formData,
           portfolio: uploadedImages,
           createdAt: serverTimestamp(),
+          lastUpdated: serverTimestamp(),
         });
         Alert.alert('Success', 'Business registered.');
         if (onRegistered) onRegistered(docRef.id);

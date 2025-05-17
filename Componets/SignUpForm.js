@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Text, TouchableOpacity, Alert } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, Alert,ScrollView } from 'react-native';
 import { auth, db } from '../firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
@@ -12,6 +12,7 @@ const SignUpForm = ({ onSignUp, onSwitchToLogin }) => {
     password: '',
     confirmPassword: '',
     phone: '',
+    accountType: 'client', 
   });
 
   const handleChange = (name, value) => {
@@ -19,9 +20,9 @@ const SignUpForm = ({ onSignUp, onSwitchToLogin }) => {
   };
 
   const handleSubmit = async () => {
-    const { name, email, password, confirmPassword, phone } = formData;
+    const { name, email, password, confirmPassword, phone, accountType } = formData;
 
-    if (!name || !email || !password || !confirmPassword || !phone) {
+    if (!name || !email || !password || !confirmPassword || !phone || !accountType) {
       Alert.alert('Error', 'Todos los campos son obligatorios');
       return;
     }
@@ -37,20 +38,20 @@ const SignUpForm = ({ onSignUp, onSwitchToLogin }) => {
     }
 
     try {
-      // Crear usuario con email y password
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const uid = userCredential.user.uid;
 
-      // Guardar datos en Firestore
       await setDoc(doc(db, 'users', uid), {
         name,
         email,
         phone,
+        accountType, 
         createdAt: serverTimestamp(),
       });
 
       Alert.alert('Éxito', 'Cuenta creada correctamente');
-      if (onSignUp) onSignUp(); // Cambia de pantalla si quieres
+      if (onSignUp) onSignUp(accountType); 
+
     } catch (error) {
       console.error(error);
       if (error.code === 'auth/email-already-in-use') {
@@ -62,7 +63,7 @@ const SignUpForm = ({ onSignUp, onSwitchToLogin }) => {
   };
 
   return (
-    <View style={styles.loginFormContainer}>
+    <ScrollView style={styles.loginFormContainer}>
       <Text style={styles.titleCreate}>Welcome! Create your account below</Text>
 
       <TextInput
@@ -105,6 +106,31 @@ const SignUpForm = ({ onSignUp, onSwitchToLogin }) => {
         onChangeText={(text) => handleChange('confirmPassword', text)}
       />
 
+
+      <View style={styles.accountTypeContainer}>
+        <Text style={styles.labelRe}>Register as:</Text>
+        <View style={styles.accountTypeOptions}>
+          <TouchableOpacity
+            style={[
+              styles.accountTypeButton,
+              formData.accountType === 'client' && styles.selectedButton,
+            ]}
+            onPress={() => handleChange('accountType', 'client')}
+          >
+            <Text style={styles.accountTypeText}>Client</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.accountTypeButton,
+              formData.accountType === 'business' && styles.selectedButton,
+            ]}
+            onPress={() => handleChange('accountType', 'business')}
+          >
+            <Text style={styles.accountTypeText}>Business</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
       <TouchableOpacity style={styles.createAccountButton} onPress={handleSubmit}>
         <Text style={styles.createAccountText}>Create Account</Text>
       </TouchableOpacity>
@@ -112,7 +138,7 @@ const SignUpForm = ({ onSignUp, onSwitchToLogin }) => {
       <TouchableOpacity onPress={onSwitchToLogin}>
         <Text style={styles.signUpText}>Already have an account? Log In</Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 

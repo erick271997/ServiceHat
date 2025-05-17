@@ -3,12 +3,12 @@ import { TouchableOpacity, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import styles from '../Styles/styles';
-import { useAuth } from '../Context/AuthContext'; // ✅ usar contexto global
+import { useAuth } from '../Context/AuthContext'; 
 
 const MenuButton = () => {
   const [isMenuVisible, setMenuVisible] = useState(false);
   const navigation = useNavigation();
-  const { setIsLoggedIn } = useAuth(); // ✅ ya no se recibe por props
+  const { setIsLoggedIn } = useAuth(); 
 
   const toggleMenu = () => {
     setMenuVisible(!isMenuVisible);
@@ -31,10 +31,10 @@ const MenuButton = () => {
 
   const handleLogout = () => {
     setMenuVisible(false);
-    setIsLoggedIn(false); // ✅ cerrar sesión global
+    setIsLoggedIn(false); 
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Home' }], // ✅ redirige al inicio si quieres
+      routes: [{ name: 'Home' }], 
     });
   };
 

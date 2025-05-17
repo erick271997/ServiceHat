@@ -1,81 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 import styles from '../Styles/styles';
 
 const PopularServices = () => {
   const navigation = useNavigation();
+  const [services, setServices] = useState([]);
 
   const userCoords = { latitude: 30.0187, longitude: -95.4693 };
 
-  const services = [
-    {
-      id: 1,
-      name: 'AutoFix Pro',
-      category: 'Mechanic',
-      description: 'Servicio de reparación de vehículos',
-      Subcategorías: 'Car repair, oil change, tire rotation, brake service',
-      rating: 4.8,
-      businessType: 'LLC',
-      zipCode: '77090',
-      location: { latitude: 30.0175, longitude: -95.4715 },
-    },
-    {
-      id: 2,
-      name: 'Sparkling Clean',
-      category: 'Cleaning',
-      description: 'Servicio de limpieza de hogares',
-      Subcategorías: 'Deep cleaning, carpet, office, window cleaning',
-      rating: 4.5,
-      businessType: 'Individual',
-      zipCode: '77091',
-      location: { latitude: 30.0181, longitude: -95.4701 },
-    },
-    {
-      id: 3,
-      name: 'Builder Max',
-      category: 'Construction',
-      description: 'Remodelación y construcción',
-      Subcategorías: 'Remodeling, roofing, plumbing, electrical',
-      rating: 4.6,
-      businessType: 'S-Corp',
-      zipCode: '77092',
-      location: { latitude: 30.0191, longitude: -95.4691 },
-    },
-    {
-      id: 4,
-      name: 'Houston Tow',
-      category: 'Crane',
-      description: 'Servicio de grúas',
-      Subcategorías: 'Towing, recovery, emergency assist',
-      rating: 4.2,
-      businessType: 'LLC',
-      zipCode: '77091',
-      location: { latitude: 30.0215, longitude: -95.4705 },
-    },
-    {
-      id: 5,
-      name: 'Nail Art Studio',
-      category: 'Manicure',
-      description: 'Cuidado de uñas y manos',
-      Subcategorías: 'Nails, manicure, pedicure, design',
-      rating: 4.9,
-      businessType: 'Individual',
-      zipCode: '77093',
-      location: { latitude: 30.0241, longitude: -95.4680 },
-    },
-    {
-      id: 6,
-      name: 'Cool Air Experts',
-      category: 'Air-conditioning',
-      description: 'Instalación y reparación de A/C',
-      Subcategorías: 'AC install, AC repair, maintenance',
-      rating: 4.7,
-      businessType: 'LLC',
-      zipCode: '77090',
-      location: { latitude: 30.0200, longitude: -95.4750 },
-    },
-  ];
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const today = new Date();
+        const lastSunday = new Date(today.setDate(today.getDate() - today.getDay()));
+
+        const querySnapshot = await getDocs(query(
+          collection(db, 'businesses'),
+          where('membership', '==', true),
+          where('lastUpdated', '>=', lastSunday)
+        ));
+
+        const fetchedServices = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+
+        setServices(fetchedServices);
+      } catch (error) {
+        console.error('Error fetching services:', error);
+      }
+    };
+
+    fetchServices();
+  }, []);
 
   function getDistanceInKm(lat1, lon1, lat2, lon2) {
     const toRad = (value) => (value * Math.PI) / 180;
@@ -93,23 +53,24 @@ const PopularServices = () => {
   function getTopServices() {
     const scoredServices = services.map((service) => {
       let score = 0;
+      const lat = service?.location?.latitude;
+      const lon = service?.location?.longitude;
 
-      const distance = getDistanceInKm(
-        userCoords.latitude,
-        userCoords.longitude,
-        service.location.latitude,
-        service.location.longitude
-      );
+      if (lat && lon) {
+        const distance = getDistanceInKm(
+          userCoords.latitude,
+          userCoords.longitude,
+          lat,
+          lon
+        );
 
-      if (distance <= 2) score += 3;
-      else if (distance <= 5) score += 2;
-      else if (distance <= 10) score += 1;
+        if (distance <= 2) score += 3;
+        else if (distance <= 5) score += 2;
+        else if (distance <= 10) score += 1;
+      }
 
       if (service.rating >= 4.5) score += 2;
       else if (service.rating >= 4.0) score += 1;
-
-      if (service.businessType === 'LLC') score += 2;
-      if (service.businessType === 'S-Corp') score += 1;
 
       return { ...service, score };
     });
@@ -147,11 +108,10 @@ const PopularServices = () => {
           <View style={styles.imagePlaceholder} />
           <View style={styles.serviceInfo}>
             <Text style={styles.cardTitle}>{service.name}</Text>
-            <Text style={styles.cardSub}>TC: {service.businessType}</Text>
             <Text style={styles.descriptionText}>
-              {service.description || 'Sin descripción disponible'}
+              {service.description || 'No description available'}
             </Text>
-            <Text style={styles.cardSub}>Categoría: {service.category}</Text>
+            <Text style={styles.cardSub}>Category: {service.category}</Text>
 
             {service.Subcategorías && (
               <View style={styles.hashtagsRow}>

@@ -7,7 +7,7 @@ const LoginButton = () => {
   const navigation = useNavigation();
 
   const handleLogin = () => {
-    // Navega al inicio
+
     navigation.reset({
       index: 0,
       routes: [{ name: 'Home' }],

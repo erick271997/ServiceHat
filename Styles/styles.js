@@ -164,6 +164,17 @@ signUpButtonText: {
   // login
   loginFormContainer: {
     padding: 20,
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3,
+    marginVertical: 10,
+    width: '100%',
+    maxWidth: 500,
+    alignSelf: 'center',
     gap: 12,
   },
   
@@ -192,6 +203,8 @@ signUpButtonText: {
     textAlign: 'center',
     marginTop: 4,
   },
+
+  // create account
   
   createAccountButton: {
     marginTop: 20,
@@ -200,6 +213,42 @@ signUpButtonText: {
     borderRadius: 8,
     alignItems: 'center',
   },
+
+  accountTypeContainer: {
+    marginVertical: 10,
+  },
+  labelRe: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1E90FF',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  
+  accountTypeOptions: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+  },
+  
+  accountTypeButton: {
+    padding: 10,
+
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+  },
+  
+  selectedButton: {
+    backgroundColor: '#1E90FF',
+  },
+  
+  accountTypeText: {
+    color: '#1E90FF',
+    fontSize: 16,
+    color: 'black',
+    fontWeight: 'bold',
+  },
+  
   
   createAccountText: {
     color: '#fff',
@@ -398,6 +447,24 @@ marginTop: 13,
     },
     sectionTitle: {
       fontSize: 20,
+      fontWeight: 'bold',
+      color: '#1E90FF',
+      textAlign: 'center',
+      marginTop: 20,
+      marginBottom: 10,
+      paddingVertical: 12,
+      paddingHorizontal: 20,
+      borderRadius: 10,
+      shadowColor: '#000',
+      shadowOpacity: 0.15,
+      shadowRadius: 6,
+      shadowOffset: { width: 0, height: 3 },
+      elevation: 5,
+      borderWidth: 1,
+      borderColor: '#ccc',
+      borderRadius: 10,
+      padding: 10,
+      backgroundColor: '#fff',
       color: '#333',
       fontWeight: 'bold',
       marginBottom: 8,
@@ -612,19 +679,16 @@ cardSub: {
 
     // Footer
     footerContainer: {
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        paddingVertical: 16,
-        paddingHorizontal: 20,
-        backgroundColor: '#f2f2f2',
-        borderTopWidth: 1,
-        borderTopColor: '#ccc',
-        alignItems: 'center',
-        justifyContent: 'center',
-      },
-      
+      position: 'relative', // antes era 'absolute'
+      paddingVertical: 16,
+      paddingHorizontal: 20,
+      backgroundColor: '#f2f2f2',
+      borderTopWidth: 1,
+      borderTopColor: '#ccc',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    
       
       footerText: {
         fontSize: 12,
